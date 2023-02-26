@@ -8,12 +8,14 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
+            <Rectangle Height="2" Fill="Black" Width="400" HorizontalAlignment="Left"/>
             <TextBlock>
             <Run Text="ФИО:"/>
             <Run Text="{Binding Employee_name}"/>
             <Run Text="{Binding Employee_surname}"/>
             <Run Text="{Binding Employee_patronymic}"/>
             </TextBlock>
+            
             <TextBlock>
             <Run Text="Телефон:"/>
             <Run Text="{Binding Phone_number_emp}"/>
@@ -45,6 +47,7 @@
                 <Run Text="Зарплата:"/>
                 <Run Text="{Binding Post.Salary.Salary_volume,StringFormat={}{0}₽}"/>
             </TextBlock>
+
         </StackPanel>
     </Grid>
 </UserControl>

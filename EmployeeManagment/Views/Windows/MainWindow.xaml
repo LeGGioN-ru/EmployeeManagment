@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManagment"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Initialized="Window_Initialized">
+        Height="450" Width="800"
+        Initialized="Window_Initialized"
+        Title="{Binding ElementName=MainFrame, Path=Content.Title}">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
