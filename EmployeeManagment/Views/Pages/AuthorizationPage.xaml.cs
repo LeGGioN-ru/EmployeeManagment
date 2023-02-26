@@ -38,7 +38,17 @@ namespace EmployeeManagment.Views.Pages
 
         private void ButtonEnter_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EmployeesPage());
+            string password = string.Empty;
+
+            if (PasswordVisibleCheckBox.IsChecked.Value)
+                password = PasswordTextBox.Text;
+            else
+                password = PasswordBox.Password;
+
+            if (password == "admin" && LoginTextBox.Text == "admin")
+                NavigationService.Navigate(new EmployeesPage());
+            else
+                MessageBox.Show("Не удалось войти, пароль или логин не верен", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
