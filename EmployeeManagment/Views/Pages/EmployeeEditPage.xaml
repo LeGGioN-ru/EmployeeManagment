@@ -68,6 +68,16 @@
                     Content="Добавить"
                     Margin="0 15 0 0"
                     x:Name="AddEditButton" Click="AddEditButton_Click"/>
+            <Button Width="200"
+                    Content="Назад"
+                    Margin="0 15 0 0"
+                   Click="ButtonBack_Click"/>
+
+            <Button Width="200"
+                    Content="Печать"
+                    Margin="0 15 0 0"
+                    x:Name="PrintButton" 
+                    Click="PrintButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

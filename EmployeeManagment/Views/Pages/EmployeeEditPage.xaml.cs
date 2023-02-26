@@ -1,18 +1,12 @@
 ﻿using EmployeeManagment.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using System.Windows.Forms;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Xml.Linq;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace EmployeeManagment.Views.Pages
 {
@@ -27,6 +21,7 @@ namespace EmployeeManagment.Views.Pages
             InitializeComponent();
 
             SetButtonName();
+            PrintButton.Visibility = Visibility.Collapsed;
         }
 
         public EmployeeEditPage(Employee employee)
@@ -35,6 +30,19 @@ namespace EmployeeManagment.Views.Pages
 
             _employee = employee;
             SetButtonName(employee);
+            BindingData(employee);
+        }
+
+        private void BindingData(Employee employee)
+        {
+            FullNameTextBox.Text = employee.Employee_surname + " " + employee.Employee_name + " " + employee.Employee_patronymic;
+            DateBirthPicker.SelectedDate = employee.Birthday;
+            PhoneNumberTextBox.Text = employee.Phone_number_emp;
+            AddressTextBox.Text = employee.Address;
+            PassportDataTextBox.Text = employee.Passport_data.Passport_serial + " " + employee.Passport_data.Passport_number;
+            DateIssuePicker.SelectedDate = employee.Emp_discription.Date_of_employment;
+            EmployeeTypeComboBox.SelectedItem = employee.Emp_discription.Emp_type;
+            PostComboBox.SelectedItem = employee.Post;
         }
 
         private void AddEditButton_Click(object sender, RoutedEventArgs e)
@@ -65,7 +73,7 @@ namespace EmployeeManagment.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -172,7 +180,15 @@ namespace EmployeeManagment.Views.Pages
 
         private void Edit()
         {
-
+            _employee.Post = PostComboBox.SelectedItem as Post;
+            _employee.Emp_discription.Emp_type = EmployeeTypeComboBox.SelectedItem as Emp_type;
+            _employee.Emp_discription.Date_of_employment = DateIssuePicker.SelectedDate.Value;
+            _employee.Address = AddressTextBox.Text;
+            _employee.Birthday = DateBirthPicker.SelectedDate.Value;
+            _employee.Employee_name = FullNameTextBox.Text.Split(' ')[1];
+            _employee.Employee_surname = FullNameTextBox.Text.Split()[0];
+            _employee.Employee_patronymic = FullNameTextBox.Text.Split(' ').Length == 3 ? FullNameTextBox.Text.Split(' ')[2] : string.Empty;
+            _employee.Phone_number_emp = PhoneNumberTextBox.Text;
         }
 
         private void SetButtonName(Employee employee = null)
@@ -187,6 +203,31 @@ namespace EmployeeManagment.Views.Pages
         {
             EmployeeTypeComboBox.ItemsSource = App.Context.Emp_type.ToList();
             PostComboBox.ItemsSource = App.Context.Post.ToList();
+        }
+
+        private void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
+            Word.Application wordApp = new Word.Application();
+
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Word Document (*.docx)|*.docx";
+            saveDialog.Title = "Save Word Document";
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                Word.Document wordDoc = wordApp.Documents.Add();
+
+                wordDoc.Content.Text = _employee.ToString();
+
+                wordDoc.SaveAs2(saveDialog.FileName);
+
+                wordDoc.Close();
+                wordApp.Quit();
+            }
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EmployeesPage());
         }
     }
 }

@@ -14,7 +14,7 @@
             <RowDefinition Height="8*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="EmployeesListView"/>
+        <ListView x:Name="EmployeesListView" MouseDoubleClick="EmployeesListView_MouseDoubleClick"/>
 
         <StackPanel Grid.Row="1"
                 VerticalAlignment="Center"

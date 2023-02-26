@@ -44,5 +44,11 @@ namespace EmployeeManagment.Views.Pages
                 UpdateDataGrid();
             }
         }
+
+        private void EmployeesListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (EmployeesListView.SelectedItem is EmployeeRecord employeeRecord)
+                NavigationService.Navigate(new EmployeeEditPage(employeeRecord.Employee));
+        }
     }
 }

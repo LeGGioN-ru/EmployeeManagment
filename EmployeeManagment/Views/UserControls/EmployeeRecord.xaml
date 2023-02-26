@@ -14,7 +14,10 @@
             <Run Text="{Binding Employee_surname}"/>
             <Run Text="{Binding Employee_patronymic}"/>
             </TextBlock>
-
+            <TextBlock>
+            <Run Text="Телефон:"/>
+            <Run Text="{Binding Phone_number_emp}"/>
+            </TextBlock>
             <TextBlock>
                 <Run Text="День рождения:"/>
                 <Run Text="{Binding Birthday,  StringFormat=d}"/>

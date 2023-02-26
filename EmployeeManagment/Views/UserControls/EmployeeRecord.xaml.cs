@@ -7,6 +7,8 @@ namespace EmployeeManagment.Views.UserControls
     {
         private Employee _employee;
 
+        public Employee Employee => _employee;
+
         public EmployeeRecord(Employee employee)
         {
             InitializeComponent();
