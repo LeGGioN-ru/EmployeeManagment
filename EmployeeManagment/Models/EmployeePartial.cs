@@ -12,7 +12,7 @@
             finalString += $"Адрес: {Address}\n";
             finalString += $"Паспортные данные: {Passport_data.Passport_serial} {Passport_data.Passport_number}\n";
             finalString += $"Дата принятия на работу: {Emp_discription.Date_of_employment.ToShortDateString()}\n";
-            finalString += $"Должность: {Post.Post_name} Зарплата: {Post.Salary.Salary_volume}\n";
+            finalString += $"Должность: {Post.Post_name} Зарплата: {Post.Salary.Salary_volume}₽\n";
 
             return finalString;
         }
