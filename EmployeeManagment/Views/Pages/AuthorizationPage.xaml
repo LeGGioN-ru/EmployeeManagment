@@ -1,0 +1,58 @@
+﻿<Page x:Class="EmployeeManagment.Views.Pages.AuthorizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EmployeeManagment.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AuthorizationPage">
+
+    <Grid Background="White">
+        <StackPanel  HorizontalAlignment="Center"
+                     VerticalAlignment="Center">
+            <TextBlock Text="Авторизация"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 20 0 10">
+                <TextBlock Text="Логин"
+                           FontSize="18"
+                           Margin="0 0 15 0"/>
+                <TextBox Width="200"
+                         x:Name="LoginTextBox"
+                         Text="admin"
+                         Padding="3"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Пароль"
+                           FontSize="18"
+                           Margin="0 0 3.9 0"/>
+                <StackPanel>
+                    <TextBox Width="200"
+                         x:Name="PasswordTextBox"
+                         Text="admin"
+                         Padding="3" Visibility="Collapsed"/>
+                    <PasswordBox Width="200"
+                         x:Name="PasswordBox"
+                         Password="admin"
+                         Padding="3"/>
+                </StackPanel>
+            </StackPanel>
+
+            <CheckBox HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      x:Name="PasswordVisibleCheckBox"
+                      Margin="0 10 0 0"
+                      Content="Показать пароль"
+                     Checked="PasswordVisibleCheckBox_Checked"
+                      Unchecked="PasswordVisibleCheckBox_Unchecked"/>
+            <Button Content="Войти"
+                    Width="100"
+                    Margin="0 15 0 0" Click="ButtonEnter_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

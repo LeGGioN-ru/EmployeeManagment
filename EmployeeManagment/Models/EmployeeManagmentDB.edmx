@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище EmpControlModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Emp_discription">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="int" Nullable="false" />
+          <Property Name="Emp_type_id" Type="int" Nullable="false" />
+          <Property Name="Date_of_employment" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Emp_type">
+          <Key>
+            <PropertyRef Name="Emp_type_id" />
+          </Key>
+          <Property Name="Emp_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post_id" Type="int" Nullable="false" />
+          <Property Name="Employee_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Employee_surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Employee_patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone_number_emp" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Birthday" Type="datetime" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="140" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Passport_data">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="int" Nullable="false" />
+          <Property Name="Passport_serial" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Passport_number" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Post_id" />
+          </Key>
+          <Property Name="Post_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Post_discription" Type="nvarchar" MaxLength="500" />
+          <Property Name="Salary_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="Salary_id" />
+          </Key>
+          <Property Name="Salary_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Salary_volume" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Emp_discr__Emp_t__571DF1D5">
+          <End Role="Emp_type" Type="Self.Emp_type" Multiplicity="1" />
+          <End Role="Emp_discription" Type="Self.Emp_discription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp_type">
+              <PropertyRef Name="Emp_type_id" />
+            </Principal>
+            <Dependent Role="Emp_discription">
+              <PropertyRef Name="Emp_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Emp_discr__Emplo__5441852A">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Emp_discription" Type="Self.Emp_discription" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Emp_discription">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Post_i__5535A963">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Post_id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Passport___Emplo__534D60F1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Passport_data" Type="Self.Passport_data" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Passport_data">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__Salary_id__5629CD9C">
+          <End Role="Salary" Type="Self.Salary" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salary">
+              <PropertyRef Name="Salary_id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Salary_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище EmpControlModelContainer">
+          <EntitySet Name="Emp_discription" EntityType="Self.Emp_discription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emp_type" EntityType="Self.Emp_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passport_data" EntityType="Self.Passport_data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Emp_discr__Emp_t__571DF1D5" Association="Self.FK__Emp_discr__Emp_t__571DF1D5">
+            <End Role="Emp_type" EntitySet="Emp_type" />
+            <End Role="Emp_discription" EntitySet="Emp_discription" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Emp_discr__Emplo__5441852A" Association="Self.FK__Emp_discr__Emplo__5441852A">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Emp_discription" EntitySet="Emp_discription" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Post_i__5535A963" Association="Self.FK__Employee__Post_i__5535A963">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Passport___Emplo__534D60F1" Association="Self.FK__Passport___Emplo__534D60F1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Passport_data" EntitySet="Passport_data" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__Salary_id__5629CD9C" Association="Self.FK__Post__Salary_id__5629CD9C">
+            <End Role="Salary" EntitySet="Salary" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmpControlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Emp_discription">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="Int32" Nullable="false" />
+          <Property Name="Emp_type_id" Type="Int32" Nullable="false" />
+          <Property Name="Date_of_employment" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Emp_type" Relationship="Self.FK__Emp_discr__Emp_t__571DF1D5" FromRole="Emp_discription" ToRole="Emp_type" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Emp_discr__Emplo__5441852A" FromRole="Emp_discription" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Emp_type">
+          <Key>
+            <PropertyRef Name="Emp_type_id" />
+          </Key>
+          <Property Name="Emp_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Emp_discription" Relationship="Self.FK__Emp_discr__Emp_t__571DF1D5" FromRole="Emp_type" ToRole="Emp_discription" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post_id" Type="Int32" Nullable="false" />
+          <Property Name="Employee_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Employee_surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Employee_patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_number_emp" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="140" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Emp_discription" Relationship="Self.FK__Emp_discr__Emplo__5441852A" FromRole="Employee" ToRole="Emp_discription" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Employee__Post_i__5535A963" FromRole="Employee" ToRole="Post" />
+          <NavigationProperty Name="Passport_data" Relationship="Self.FK__Passport___Emplo__534D60F1" FromRole="Employee" ToRole="Passport_data" />
+        </EntityType>
+        <EntityType Name="Passport_data">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="Int32" Nullable="false" />
+          <Property Name="Passport_serial" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passport_number" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Passport___Emplo__534D60F1" FromRole="Passport_data" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Post_id" />
+          </Key>
+          <Property Name="Post_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Post_discription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Salary_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__Post_i__5535A963" FromRole="Post" ToRole="Employee" />
+          <NavigationProperty Name="Salary" Relationship="Self.FK__Post__Salary_id__5629CD9C" FromRole="Post" ToRole="Salary" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="Salary_id" />
+          </Key>
+          <Property Name="Salary_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Salary_volume" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Post__Salary_id__5629CD9C" FromRole="Salary" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__Emp_discr__Emp_t__571DF1D5">
+          <End Role="Emp_type" Type="Self.Emp_type" Multiplicity="1" />
+          <End Role="Emp_discription" Type="Self.Emp_discription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp_type">
+              <PropertyRef Name="Emp_type_id" />
+            </Principal>
+            <Dependent Role="Emp_discription">
+              <PropertyRef Name="Emp_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Emp_discr__Emplo__5441852A">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Emp_discription" Type="Self.Emp_discription" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Emp_discription">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Post_i__5535A963">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Post_id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Passport___Emplo__534D60F1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Passport_data" Type="Self.Passport_data" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Passport_data">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__Salary_id__5629CD9C">
+          <End Role="Salary" Type="Self.Salary" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salary">
+              <PropertyRef Name="Salary_id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Salary_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpManagmentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Emp_discription" EntityType="Self.Emp_discription" />
+          <EntitySet Name="Emp_type" EntityType="Self.Emp_type" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Passport_data" EntityType="Self.Passport_data" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__Emp_discr__Emp_t__571DF1D5" Association="Self.FK__Emp_discr__Emp_t__571DF1D5">
+            <End Role="Emp_type" EntitySet="Emp_type" />
+            <End Role="Emp_discription" EntitySet="Emp_discription" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Emp_discr__Emplo__5441852A" Association="Self.FK__Emp_discr__Emplo__5441852A">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Emp_discription" EntitySet="Emp_discription" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Post_i__5535A963" Association="Self.FK__Employee__Post_i__5535A963">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Passport___Emplo__534D60F1" Association="Self.FK__Passport___Emplo__534D60F1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Passport_data" EntitySet="Passport_data" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__Salary_id__5629CD9C" Association="Self.FK__Post__Salary_id__5629CD9C">
+            <End Role="Salary" EntitySet="Salary" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EmpControlModelContainer" CdmEntityContainer="EmpManagmentEntities">
+          <EntitySetMapping Name="Emp_discription">
+            <EntityTypeMapping TypeName="EmpControlModel.Emp_discription">
+              <MappingFragment StoreEntitySet="Emp_discription">
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Emp_type_id" ColumnName="Emp_type_id" />
+                <ScalarProperty Name="Date_of_employment" ColumnName="Date_of_employment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_type">
+            <EntityTypeMapping TypeName="EmpControlModel.Emp_type">
+              <MappingFragment StoreEntitySet="Emp_type">
+                <ScalarProperty Name="Emp_type_id" ColumnName="Emp_type_id" />
+                <ScalarProperty Name="Type_name" ColumnName="Type_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="EmpControlModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Post_id" ColumnName="Post_id" />
+                <ScalarProperty Name="Employee_name" ColumnName="Employee_name" />
+                <ScalarProperty Name="Employee_surname" ColumnName="Employee_surname" />
+                <ScalarProperty Name="Employee_patronymic" ColumnName="Employee_patronymic" />
+                <ScalarProperty Name="Phone_number_emp" ColumnName="Phone_number_emp" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passport_data">
+            <EntityTypeMapping TypeName="EmpControlModel.Passport_data">
+              <MappingFragment StoreEntitySet="Passport_data">
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Passport_serial" ColumnName="Passport_serial" />
+                <ScalarProperty Name="Passport_number" ColumnName="Passport_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="EmpControlModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="Post_id" ColumnName="Post_id" />
+                <ScalarProperty Name="Post_name" ColumnName="Post_name" />
+                <ScalarProperty Name="Post_discription" ColumnName="Post_discription" />
+                <ScalarProperty Name="Salary_id" ColumnName="Salary_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salary">
+            <EntityTypeMapping TypeName="EmpControlModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="Salary_id" ColumnName="Salary_id" />
+                <ScalarProperty Name="Salary_volume" ColumnName="Salary_volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EmpControlModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
