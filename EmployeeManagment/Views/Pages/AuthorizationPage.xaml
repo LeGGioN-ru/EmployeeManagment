@@ -8,19 +8,23 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AuthorizationPage">
 
-    <Grid Background="White">
+    <Grid>
+      
+
         <StackPanel  HorizontalAlignment="Center"
                      VerticalAlignment="Center">
             <TextBlock Text="Авторизация"
                        FontSize="20"
                        FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"
+                       Style="{StaticResource DefaultTextBlock}"/>
 
             <StackPanel Orientation="Horizontal"
                         Margin="0 20 0 10">
                 <TextBlock Text="Логин"
                            FontSize="18"
-                           Margin="0 0 15 0"/>
+                           Margin="0 0 15 0"
+                           Style="{StaticResource DefaultTextBlock}"/>
                 <TextBox Width="200"
                          x:Name="LoginTextBox"
                          Text="admin"
@@ -30,7 +34,8 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Пароль"
                            FontSize="18"
-                           Margin="0 0 3.9 0"/>
+                           Margin="0 0 3.9 0"
+                           Style="{StaticResource DefaultTextBlock}"/>
                 <StackPanel>
                     <TextBox Width="200"
                          x:Name="PasswordTextBox"
@@ -47,12 +52,16 @@
                       VerticalAlignment="Center"
                       x:Name="PasswordVisibleCheckBox"
                       Margin="0 10 0 0"
-                      Content="Показать пароль"
                      Checked="PasswordVisibleCheckBox_Checked"
-                      Unchecked="PasswordVisibleCheckBox_Unchecked"/>
-            <Button Content="Войти"
-                    Width="100"
-                    Margin="0 15 0 0" Click="ButtonEnter_Click"/>
+                      Unchecked="PasswordVisibleCheckBox_Unchecked"
+                      >
+                <TextBlock Text="Показать пароль" Style="{StaticResource DefaultTextBlock}"/>
+            </CheckBox>
+            <Button Width="100"
+                    Margin="0 15 0 0" Click="ButtonEnter_Click"
+                    Style="{StaticResource RoundButton}">
+                <TextBlock Text="Войти" Style="{StaticResource DefaultTextBlock}"/>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

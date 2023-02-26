@@ -194,9 +194,9 @@ namespace EmployeeManagment.Views.Pages
         private void SetButtonName(Employee employee = null)
         {
             if (employee == null)
-                AddEditButton.Content = "Добавить";
+                AddEditTextBlock.Text = "Добавить";
             else
-                AddEditButton.Content = "Изменить";
+                AddEditTextBlock.Text = "Изменить";
         }
 
         private void Page_Initialized(object sender, EventArgs e)

@@ -9,31 +9,36 @@
       Title="EmployeesPage"
       Initialized="Page_Initialized">
 
-    <Grid Background="White">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="EmployeesListView" MouseDoubleClick="EmployeesListView_MouseDoubleClick"/>
+        <ListView x:Name="EmployeesListView" MouseDoubleClick="EmployeesListView_MouseDoubleClick" Margin="20"/>
 
         <StackPanel Grid.Row="1"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
 
-            <Button Content="Выйти"
+            <Button
                      FontSize="18"
                      Width="200" 
                      Click="ButtonExit_Click"
-                     Margin="10 0 0 0"/>
-            <Button Content="Удалить"
-                    FontSize="18"
+                     Margin="10 0 0 0" Style="{StaticResource RoundButton}">
+                <TextBlock Text="Выйти" Style="{StaticResource DefaultTextBlock}"/>
+            </Button>
+            <Button FontSize="18"
+                    Width="200" Style="{StaticResource RoundButton}"
+                    Margin="10 0 0 0" Click="ButtonDelete_Click">
+                <TextBlock Text="Удалить" Style="{StaticResource DefaultTextBlock}"/>
+            </Button>
+            <Button  FontSize="18"
                     Width="200"
-                    Margin="10 0 0 0" Click="ButtonDelete_Click"/>
-            <Button Content="Добавить"
-                    FontSize="18"
-                    Width="200"
-                    Margin="10 0 0 0" Click="ButtonAdd_Click"/>
+                     Style="{StaticResource RoundButton}"
+                    Margin="10 0 0 0" Click="ButtonAdd_Click">
+                <TextBlock Text="Добавить" Style="{StaticResource DefaultTextBlock}"/>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>
